@@ -52,7 +52,7 @@ public class PlayActivity extends AppCompatActivity implements PlayView {
         //调用playPresenter中方法完成音乐的播放 图片 歌名的加载 进度条的实时更新与拖动更新
         playPresenter = new PlayPresenter(this);
         playPresenter.getMusic(getIntent());
-        playPresenter.jumpToPlayMusicService();
+        playPresenter.jumpToPlayMusicService(getIntent());
         playPresenter.initMusicPic();
         playPresenter.initMusicName();
         //注册广播用于实时刷新音乐播放时间
@@ -95,14 +95,14 @@ public class PlayActivity extends AppCompatActivity implements PlayView {
                     //调用playPresenter中方法完成音乐的播放 图片 歌名的加载 进度条的实时更新与拖动更新
                     playPresenter.initMusicPic();
                     playPresenter.initMusicName();
-                    playPresenter.jumpToPlayMusicService();
+                    playPresenter.jumpToPlayMusicService(getIntent());
                     break;
                 case R.id.iv_previous:
                     playPresenter.getPreviousMusic(getIntent());
                     //调用playPresenter中方法完成音乐的播放 图片 歌名的加载 进度条的实时更新与拖动更新
                     playPresenter.initMusicPic();
                     playPresenter.initMusicName();
-                    playPresenter.jumpToPlayMusicService();
+                    playPresenter.jumpToPlayMusicService(getIntent());
                     break;
 
             }
@@ -130,6 +130,11 @@ public class PlayActivity extends AppCompatActivity implements PlayView {
                         int minute = duration / 60000;
                         int second = (duration - minute * 60000) / 1000;
                         totalTime.setText(df.format(minute) + ":" + df.format(second));
+                    }
+                    if (intent.getBooleanExtra("isPlay",true)){
+                        startOrPause.setBackgroundResource(R.mipmap.ic_pause);
+                    }else {
+                        startOrPause.setBackgroundResource(R.mipmap.ic_play);
                     }
                     break;
                 case "action.playNextMusic":
