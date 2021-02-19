@@ -30,14 +30,14 @@ public class PlayMusicService extends Service implements PlayMusicView {
     private String notificationId = "serviceid";
     private String notificationName = "servicename";
 
-    private void showNotification() {
+    private void showNotification(Intent intent) {
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         //创建NotificationChannel
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(notificationId, notificationName, NotificationManager.IMPORTANCE_HIGH);
             notificationManager.createNotificationChannel(channel);
         }
-        startForeground(1, playMusicPresenter.getNotification(this, notificationId));
+        startForeground(1, playMusicPresenter.getNotification(this, notificationId,intent));
     }
 
     @Override
@@ -45,7 +45,7 @@ public class PlayMusicService extends Service implements PlayMusicView {
         //调用playMusicPresenter中方法取到当前点击Music对象并进行播放
         playMusicPresenter.playMusic(intent, this, broadcastReceiver);
         //设置/更新通知
-        showNotification();
+        showNotification(intent);
         //设置播放完毕后的操作
         player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
@@ -101,6 +101,7 @@ public class PlayMusicService extends Service implements PlayMusicView {
                         intent.putExtra("currentPosition", player.getCurrentPosition());
                         intent.putExtra("duration", player.getDuration());
                         intent.putExtra("action", PlayActivity.ACTION_UPDATE_UI);
+                        intent.putExtra("isPlay",isPlaying());
                         LocalBroadcastManager.getInstance(PlayMusicService.this).sendBroadcast(intent);
                         handler.postDelayed(this, 100);
                     }
