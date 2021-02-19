@@ -30,14 +30,14 @@ public class PlayMusicService extends Service implements PlayMusicView {
     private String notificationId = "serviceid";
     private String notificationName = "servicename";
 
-    private void showNotification(){
+    private void showNotification() {
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         //创建NotificationChannel
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(notificationId, notificationName, NotificationManager.IMPORTANCE_HIGH);
             notificationManager.createNotificationChannel(channel);
         }
-        startForeground(1,playMusicPresenter.getNotification(this,notificationId));
+        startForeground(1, playMusicPresenter.getNotification(this, notificationId));
     }
 
     @Override
@@ -92,7 +92,7 @@ public class PlayMusicService extends Service implements PlayMusicView {
     public void sendBroadcast(String action) {
         Intent intent = new Intent();
         intent.setAction(action);
-        switch (action){
+        switch (action) {
             case PlayActivity.ACTION_UPDATE_UI:
                 Handler handler = new Handler();
                 new Thread(new Runnable() {
@@ -100,14 +100,14 @@ public class PlayMusicService extends Service implements PlayMusicView {
                     public void run() {
                         intent.putExtra("currentPosition", player.getCurrentPosition());
                         intent.putExtra("duration", player.getDuration());
-                        intent.putExtra("action",PlayActivity.ACTION_UPDATE_UI);
+                        intent.putExtra("action", PlayActivity.ACTION_UPDATE_UI);
                         LocalBroadcastManager.getInstance(PlayMusicService.this).sendBroadcast(intent);
                         handler.postDelayed(this, 100);
                     }
                 }).start();
                 break;
             case PlayActivity.ACTION_PLAY_NEXT_MUSIC:
-                intent.putExtra("action",PlayActivity.ACTION_PLAY_NEXT_MUSIC);
+                intent.putExtra("action", PlayActivity.ACTION_PLAY_NEXT_MUSIC);
                 LocalBroadcastManager.getInstance(PlayMusicService.this).sendBroadcast(intent);
                 break;
         }
