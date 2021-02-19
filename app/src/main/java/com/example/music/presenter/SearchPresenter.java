@@ -19,8 +19,9 @@ public class SearchPresenter {
     private NetRequestPresenter netRequestPresenter = new NetRequestPresenter();
     private MusicSearchActivity musicSearchActivity;
     private String ids = "";
-    private String playerIds="";
+    private String playerIds = "";
     private ArrayList playerMusicArrayList;
+    private ArrayList musicArrayList;
 
     public void setIds(String ids) {
         this.ids = ids;
@@ -66,10 +67,10 @@ public class SearchPresenter {
         @Override
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
-            ArrayList musicArrayList = (ArrayList) msg.obj;
+            musicArrayList = (ArrayList) msg.obj;
             //调用接口将搜索结果初始化到界面上
-            if (musicSearchActivity!= null) {
-                musicSearchActivity.initRecyclerViewAdapt(musicArrayList,playerMusicArrayList);
+            if (musicSearchActivity != null) {
+                musicSearchActivity.initRecyclerViewAdapt(musicArrayList, playerMusicArrayList);
             }
         }
     };
@@ -81,14 +82,14 @@ public class SearchPresenter {
     }
 
     //跳转到PlayActivity
-    public void jumpToPlayActivity(Activity activity, Music music,ArrayList playerMusicArrayList) {
+    public void jumpToPlayActivity(Activity activity, Music music, ArrayList playerMusicArrayList) {
         Intent intent = new Intent(activity, PlayActivity.class);
-        intent.putExtra("playingMusic",music);
-        intent.putExtra("size",playerMusicArrayList.size());
-        intent.putExtra("position",0);
-        intent.putExtra("jumpFrom","SearchActivity");
-        for (int i = 0; i <playerMusicArrayList.size(); i++) {
-            intent.putExtra("music"+i,(Music)playerMusicArrayList.get(i));
+        intent.putExtra("playingMusic", music);
+        intent.putExtra("size", playerMusicArrayList.size());
+        intent.putExtra("position", 0);
+        intent.putExtra("jumpFrom", "SearchActivity");
+        for (int i = 0; i < playerMusicArrayList.size(); i++) {
+            intent.putExtra("music" + i, (Music) playerMusicArrayList.get(i));
         }
         activity.startActivity(intent);
     }
@@ -100,15 +101,17 @@ public class SearchPresenter {
 
     //从数据库中获取播放过的歌曲id等信息
     public void getPlayerMusic() {
-        Tools tools=new Tools();
-        playerMusicArrayList=new ArrayList();
-        playerIds= tools.getPlayerMusics(musicSearchActivity,playerMusicArrayList);
+        Tools tools = new Tools();
+        playerMusicArrayList = new ArrayList();
+        playerIds = tools.getPlayerMusics(musicSearchActivity, playerMusicArrayList);
         //获取最新的picUrl和playUrl(因为链接是临时的 所以数据库里链接等信息并没有存 需实时通过网络请求得到 )
-        if (!playerIds.equals("")){
-            netRequestPresenter=new NetRequestPresenter(playerMusicArrayList);
+        if (!playerIds.equals("")) {
+            netRequestPresenter = new NetRequestPresenter(playerMusicArrayList);
             //获取音乐的picUrl
-            netRequestPresenter.sendGetDetailRequest(playerIds,getPlayerMusicPicUrl);}
+            netRequestPresenter.sendGetDetailRequest(playerIds, getPlayerMusicPicUrl);
+        }
     }
+
     //取得picUrl后
     Handler getPlayerMusicPicUrl = new Handler(Looper.myLooper()) {
         @Override
@@ -124,7 +127,11 @@ public class SearchPresenter {
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
             playerMusicArrayList = (ArrayList) msg.obj;
-            playerIds="";
+            playerIds = "";
+            //更新点击事件中playerMusicArrayList
+            if (musicArrayList != null) {
+                musicSearchActivity.initRecyclerViewAdapt(musicArrayList, playerMusicArrayList);
+            }
         }
     };
 }
