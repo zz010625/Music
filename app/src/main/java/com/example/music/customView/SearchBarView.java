@@ -17,6 +17,7 @@ import com.example.music.R;
 
 public class SearchBarView extends View {
     private Paint paint;
+
     public SearchBarView(Context context) {
         super(context);
     }
