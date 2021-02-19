@@ -12,6 +12,7 @@ import com.example.music.view.service.PlayMusicService;
 import java.util.ArrayList;
 
 public class Tools {
+
     //向数据库添加Music对象
     public void addMusicToSQLite(Music music, PlayMusicService playMusicService) {
         MySQLiteOPenHelper sqLiteOPenHelper = new
