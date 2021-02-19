@@ -25,4 +25,5 @@ public class MusicFragmentStateAdapter extends FragmentStateAdapter {
     public int getItemCount() {
         return fragments.size();
     }
+
 }
