@@ -1,6 +1,7 @@
 package com.example.music.presenter;
 
 import android.content.Intent;
+import android.util.Log;
 
 import com.example.music.model.Music;
 import com.example.music.view.activity.PlayActivity;
@@ -23,8 +24,9 @@ public class PlayPresenter {
     public void getMusic(Intent intent) {
         music = (Music) intent.getSerializableExtra("playingMusic");
     }
+
     //得到最近播放的Music对象List
-    public void getPlayerMusicArrayList(Intent intent){
+    public void getPlayerMusicArrayList(Intent intent) {
         if (playerMusicArrayList == null) {
             playerMusicArrayList = new ArrayList();
             //取出最开始需要播放的音乐在list中的位置
