@@ -3,6 +3,7 @@ package com.example.music.model;
 import java.io.Serializable;
 
 public class Music implements Serializable {
+
     String name,artist,album,id,picUrl,playUrl,start,end="";
     boolean isFree;
 
