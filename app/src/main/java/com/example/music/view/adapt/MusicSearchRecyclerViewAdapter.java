@@ -40,11 +40,11 @@ public class MusicSearchRecyclerViewAdapter extends RecyclerView.Adapter<MusicSe
     public void onBindViewHolder(@NonNull MusicSearchRecyclerViewAdapter.ViewHolder holder, int position) {
         switch (position) {
             case 0:
-                holder.musicInformationView.setMusicInformation("歌曲","歌手","专辑");
+                holder.musicInformationView.setMusicInformation("歌曲", "歌手", "专辑");
                 break;
             default:
                 Music music = (Music) musicArrayList.get(position - 1);
-                holder.musicInformationView.setMusicInformation(music.getName(),music.getArtist(),music.getAlbum());
+                holder.musicInformationView.setMusicInformation(music.getName(), music.getArtist(), music.getAlbum());
                 break;
         }
     }
