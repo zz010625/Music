@@ -66,9 +66,19 @@ public class PlayPresenter {
     }
 
     //跳转至PlayMusicService
-    public void jumpToPlayMusicService() {
+    public void jumpToPlayMusicService(Intent getData) {
         Intent intent = new Intent(playActivity, PlayMusicService.class);
         intent.putExtra("playingMusic", music);
+        ArrayList musicArrayList=new ArrayList();
+        for (int i = 0; i <getData.getIntExtra("size",0); i++) {
+            musicArrayList.add(getData.getSerializableExtra("music"+i));
+        }
+        intent.putExtra("size",getData.getIntExtra("size",0));
+        intent.putExtra("position",getData.getIntExtra("position",0));
+        intent.putExtra("jumpFrom",getData.getStringExtra("jumpFrom"));
+        for (int i = 0; i <musicArrayList.size(); i++) {
+            intent.putExtra("music"+i,(Music)musicArrayList.get(i));
+        }
         playActivity.startService(intent);
     }
 
