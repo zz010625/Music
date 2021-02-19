@@ -33,11 +33,11 @@ public class HomePageFragment extends Fragment {
 
     }
 
-    public void OnClickSearchMusic(){
+    public void OnClickSearchMusic() {
         searchBarView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getContext().getApplicationContext(),MusicSearchActivity.class);
+                Intent intent = new Intent(getContext().getApplicationContext(), MusicSearchActivity.class);
                 startActivity(intent);
             }
         });
