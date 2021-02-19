@@ -19,6 +19,7 @@ import com.example.music.view.activity.PlayActivity;
 import com.example.music.view.service.PlayMusicService;
 
 public class PlayMusicPresenter {
+
     private PlayMusicService playMusicService;
     private Music music;
 
