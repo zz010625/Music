@@ -93,8 +93,10 @@ public class SearchPresenter {
         activity.startActivity(intent);
     }
 
-    /*以下方法及Handler是为了获取一个arrayList包含播放历史中的Music对象
-    因为播放链接并非永久有效而是临时的 所以得再次进行网络请求获取*/
+    /*
+    以下方法及Handler是为了获取一个arrayList包含播放历史中的Music对象
+    因为播放链接并非永久有效而是临时的 所以得再次进行网络请求获取
+    */
 
     //从数据库中获取播放过的歌曲id等信息
     public void getPlayerMusic() {
