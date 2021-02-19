@@ -58,7 +58,7 @@ public class PlayListFragment extends Fragment implements PlayListView {
                 if (position != 0) {
                     Music music = (Music) musicArrayList.get(position - 1);
                     //调用PlayListPresenter中方法打开PlayActivity
-                    playListPresenter.jumpToPlayActivity(PlayListFragment.this.getActivity(),musicArrayList, music,position);
+                    playListPresenter.jumpToPlayActivity(PlayListFragment.this.getActivity(), musicArrayList, music, position);
                 }
             }
         });
