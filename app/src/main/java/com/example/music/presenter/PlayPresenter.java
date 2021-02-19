@@ -19,7 +19,6 @@ public class PlayPresenter {
         this.playActivity = playActivity;
     }
 
-
     //点开音乐得到需要播放的音乐对象
     public void getMusic(Intent intent) {
         music = (Music) intent.getSerializableExtra("playingMusic");
