@@ -18,6 +18,8 @@ import com.example.music.tools.Tools;
 import com.example.music.view.activity.PlayActivity;
 import com.example.music.view.service.PlayMusicService;
 
+import java.util.ArrayList;
+
 public class PlayMusicPresenter {
 
     private PlayMusicService playMusicService;
@@ -27,8 +29,19 @@ public class PlayMusicPresenter {
         this.playMusicService = playMusicService;
     }
 
-    public Notification getNotification(Context playMusicService,String notificationId) {
+    public Notification getNotification(Context playMusicService,String notificationId,Intent intent) {
         Intent notificationIntent = new Intent(playMusicService, PlayActivity.class);
+        notificationIntent.putExtra("playingMusic", music);
+        ArrayList musicArrayList=new ArrayList();
+        for (int i = 0; i <intent.getIntExtra("size",0); i++) {
+            musicArrayList.add(intent.getSerializableExtra("music"+i));
+        }
+        notificationIntent.putExtra("size",intent.getIntExtra("size",0));
+        notificationIntent.putExtra("position",intent.getIntExtra("position",0));
+        notificationIntent.putExtra("jumpFrom",intent.getStringExtra("jumpFrom"));
+        for (int i = 0; i <musicArrayList.size(); i++) {
+            intent.putExtra("music"+i,(Music)musicArrayList.get(i));
+        }
         PendingIntent contentIntent = PendingIntent.getActivity(playMusicService, 0,notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Notification.Builder builder = new Notification.Builder(playMusicService)
