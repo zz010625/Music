@@ -25,6 +25,7 @@ public class NetRequestPresenter {
     public NetRequestPresenter(ArrayList arrayList){
         this.musicArrayList=arrayList;
     }
+
     //发送搜索请求 得到搜索结果
     public void sendSearchRequest(String name, Handler handler) {
         String mUrl="http://sandyz.ink:3000/search?keywords=" +name;
