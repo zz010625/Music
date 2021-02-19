@@ -6,4 +6,5 @@ import java.util.ArrayList;
 
 public interface PlayListView {
     void initPlayList(ArrayList musicArrayList);
+
 }
