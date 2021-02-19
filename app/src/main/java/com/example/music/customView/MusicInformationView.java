@@ -40,6 +40,7 @@ public class MusicInformationView extends View {
     protected void onMeasure(int widthMeasureSpec,int heightMeasureSpec){
         super.onMeasure(widthMeasureSpec,heightMeasureSpec);
     }
+
     public void setMusicInformation(String name,String artist,String album){
         this.name=name;
         this.artist=artist;
