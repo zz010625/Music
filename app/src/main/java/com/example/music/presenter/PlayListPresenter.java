@@ -24,6 +24,7 @@ public class PlayListPresenter {
     public PlayListPresenter(PlayListFragment playListFragment) {
         this.playListFragment = playListFragment;
     }
+
     //跳转到PlayActivity
     public void jumpToPlayActivity(Activity activity, ArrayList musicArrayList,Music music,int position){
         Intent intent = new Intent(activity, PlayActivity.class);
