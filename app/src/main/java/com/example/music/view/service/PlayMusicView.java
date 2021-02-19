@@ -6,4 +6,5 @@ import com.example.music.model.Music;
 
 public interface PlayMusicView {
     void playMusic(Music music,boolean isUnRegister);
+
 }
