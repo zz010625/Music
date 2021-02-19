@@ -31,7 +31,6 @@ public class PlayActivity extends AppCompatActivity implements PlayView {
     private SeekBar seekBar;
     private UpdateUIBroadcastReceiver broadcastReceiver;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
