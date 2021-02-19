@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import com.example.music.model.Music;
 
 public interface PlayView {
-   void initMusicPic(Music music);
-   void initMusicName(Music music);
+    void initMusicPic(Music music);
+
+    void initMusicName(Music music);
 }
