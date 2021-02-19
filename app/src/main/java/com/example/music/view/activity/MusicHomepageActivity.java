@@ -19,23 +19,24 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import java.util.ArrayList;
 
 public class MusicHomepageActivity extends AppCompatActivity {
-private ArrayList<Fragment> fragments=new ArrayList<>();
-private ViewPager2 viewPager2;
-private MusicFragmentStateAdapter musicFragmentStateAdapter;
-private TabLayout menu;
-private HomePageFragment homePageFragment=new HomePageFragment();
+    private ArrayList<Fragment> fragments = new ArrayList<>();
+    private ViewPager2 viewPager2;
+    private MusicFragmentStateAdapter musicFragmentStateAdapter;
+    private TabLayout menu;
+    private HomePageFragment homePageFragment = new HomePageFragment();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_music_homepage);
 
-        viewPager2=findViewById(R.id.vp_music);
-        menu=findViewById(R.id.tl_menu);
+        viewPager2 = findViewById(R.id.vp_music);
+        menu = findViewById(R.id.tl_menu);
 
         fragments.add(homePageFragment);
         fragments.add(new PlayListFragment());
         fragments.add(new UserCenterFragment());
-        musicFragmentStateAdapter=new MusicFragmentStateAdapter(this,fragments);
+        musicFragmentStateAdapter = new MusicFragmentStateAdapter(this, fragments);
         viewPager2.setAdapter(musicFragmentStateAdapter);
         viewPager2.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
         //设置所以页面预加载
@@ -44,13 +45,16 @@ private HomePageFragment homePageFragment=new HomePageFragment();
         new TabLayoutMediator(menu, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                switch (position){
-                    case 0:tab.setText("首页");
-                    break;
-                    case 1:tab.setText("最近播放");
-                    break;
-                    case 2:tab.setText("个人中心");
-                    break;
+                switch (position) {
+                    case 0:
+                        tab.setText("首页");
+                        break;
+                    case 1:
+                        tab.setText("最近播放");
+                        break;
+                    case 2:
+                        tab.setText("个人中心");
+                        break;
                 }
             }
         }).attach();
