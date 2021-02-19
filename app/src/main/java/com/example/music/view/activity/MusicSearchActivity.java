@@ -24,8 +24,6 @@ public class MusicSearchActivity extends AppCompatActivity implements MusicSearc
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_music_search);
-        //调用searchPresenter中方法获得播放历史中的MusicList
-        searchPresenter.getPlayerMusic();
         recyclerView = findViewById(R.id.rv_searchList);
         searchView = findViewById(R.id.sv_search_music);
         searchView.setIconifiedByDefault(false);
@@ -34,6 +32,13 @@ public class MusicSearchActivity extends AppCompatActivity implements MusicSearc
         searchView.requestFocus();
         OnClickSearchMusic();
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //调用searchPresenter中方法获得播放历史中的MusicList
+        searchPresenter.getPlayerMusic();
     }
 
     //初始化搜索结果
