@@ -23,7 +23,7 @@ public class UserCenterFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-       userCenterFragmentView= inflater.inflate(R.layout.fragment_user_center, container, false);
+        userCenterFragmentView = inflater.inflate(R.layout.fragment_user_center, container, false);
         return userCenterFragmentView;
     }
 }
