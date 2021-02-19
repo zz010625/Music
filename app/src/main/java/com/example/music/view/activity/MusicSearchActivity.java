@@ -38,14 +38,14 @@ public class MusicSearchActivity extends AppCompatActivity implements MusicSearc
 
     //初始化搜索结果
     @Override
-    public void initRecyclerViewAdapt(ArrayList musicArrayList,ArrayList playerMusicArrayList) {
+    public void initRecyclerViewAdapt(ArrayList musicArrayList, ArrayList playerMusicArrayList) {
         musicSearchRecyclerViewAdapter = new MusicSearchRecyclerViewAdapter(musicArrayList, new MusicSearchRecyclerViewAdapter.OnSongClickListener() {
             @Override
             public void clickSong(int position) {
                 if (position != 0) {
                     Music music = (Music) musicArrayList.get(position - 1);
                     //调用searchPresenter中方法打开PlayActivity
-                    searchPresenter.jumpToPlayActivity(MusicSearchActivity.this, music,playerMusicArrayList);
+                    searchPresenter.jumpToPlayActivity(MusicSearchActivity.this, music, playerMusicArrayList);
                     searchView.clearFocus();
                 }
             }
